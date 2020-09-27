@@ -19,13 +19,6 @@
             "EpiphanyInfotech\\GSuiteSMTP\\": "src/"
         }
     },
-	"extra": {
-		"laravel": {
-			"providers": [
-				"EpiphanyInfotech\\GSuiteSMTP\\GSuiteSMTPServiceProvider"
-			]
-		}
-	},
     "require": {
 		"league/oauth2-client": "2.x",
         "league/oauth2-google": "3.0.0"
