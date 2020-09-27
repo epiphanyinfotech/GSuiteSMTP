@@ -1,12 +1,15 @@
 {
     "name": "epiphany-infotech/gsuite-smtp",
     "description": "gsuite-smtp - Package to allow sending emails through Google Suite or even Gmail, without turning on the \"allow less secure apps\" and using OAuth2.0 token, client id, client secret and refresh token",
-    "type": "project",
+    "type": "package",
+	"version": "1.0.0",
     "license": "MIT",
     "authors": [
         {
             "name": "Brajinder Singh",
-            "email": "brajinder@epiphanyinfotech.com"
+            "email": "brajinder@epiphanyinfotech.com",
+			"homepage": "http://epiphanyinfotech.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "dev",
