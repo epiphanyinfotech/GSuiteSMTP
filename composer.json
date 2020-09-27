@@ -4,6 +4,7 @@
     "type": "package",
 	"version": "1.0.0",
     "license": "MIT",
+	"keywords": ["laravel", "smtp", "gsuite", "email", "mailer", "OAuth2", "allow less secure apps"],
     "authors": [
         {
             "name": "Brajinder Singh",
@@ -25,5 +26,9 @@
 			]
 		}
 	},
-    "require": {}
+    "require": {
+		"laravel/framework": "~6.0||~7.0||~8.0",
+		"league/oauth2-client": "2.x",
+        "league/oauth2-google": "3.0.0"
+	}
 }
