@@ -38,10 +38,11 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 							);
 			
 			if($enable_gsuite_smtp == 'true'){
-				
+								
 				$google_oauth = New OAuth($oauth_options);
 			
-				$gsuite_token = $google_oauth->getOauth64();
+				$gsuite_token = $google_oauth->getOauth();
+				
 				
 				// Once we have create the mailer instance, we will set a container instance
 				// on the mailer. This allows us to resolve mailer classes via containers
@@ -49,12 +50,24 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 				$mailer = new Mailer(
 					$app['view'], new Swift_Mailer($this->createSmtpDriver($mail_config, $gss_config, $gsuite_token)), $app['events']
 				);
+				
+				$from_email = $mail_config['from']['address'];
+				$from_name = $mail_config['from']['name'];
+				
+				$mailer->alwaysFrom($from_email, $from_name);
+				$mailer->alwaysReplyTo($from_email, $from_name);
 
 			
 				if ($app->bound('queue')) {
 					$mailer->setQueue($app['queue']);
 				}
 
+			}else{
+				
+				$mailer = new Mailer(
+					$app['view'], $app['swift.mailer'] , $app['events']
+				);
+				
 			}
 			
 			return $mailer;

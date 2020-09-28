@@ -122,4 +122,24 @@ class OAuth
             "\001\001"
         );
     }
+
+
+	/**
+     * Generate a OAuth token.
+     *
+     * @return string
+     */
+    public function getOauth()
+    {
+        // Get a new token if it's not available or has expired
+        if (null === $this->oauthToken || $this->oauthToken->hasExpired()) {
+            $this->oauthToken = $this->getToken();
+        }
+
+        return $this->oauthToken;
+    }
+
+
+
+
 }
