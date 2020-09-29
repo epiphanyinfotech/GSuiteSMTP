@@ -51,9 +51,7 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 					$app['view'], new Swift_Mailer($this->createSmtpDriver($mail_config, $gss_config, $gsuite_token)), $app['events']
 				);
 				
-				$from_email = $mail_config['from']['address'];
-				$from_name = $mail_config['from']['name'];
-
+				
 			}else{
 				
 				$mailer = new Mailer(
