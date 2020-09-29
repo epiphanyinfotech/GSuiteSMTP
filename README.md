@@ -15,11 +15,17 @@ ________________________________________________________________________________
 
 Once you have these:
 1. Start by running composer from the root directory of your project and type:
-`composer require epiphany-infotech/gsuite-smtp`
+```
+composer require epiphany-infotech/gsuite-smtp
+```
 2. Add the provider in the 'providers' array in your `config\app.php` file:
-`EpiphanyInfotech\GSuiteSMTP\GSuiteSMTPServiceProvider::class,`
+```
+EpiphanyInfotech\GSuiteSMTP\GSuiteSMTPServiceProvider::class,
+```
 3. Publish the config file using the command:
-`php artisan vendor:publish --tag=gsuiteconfig`
+```
+php artisan vendor:publish --tag=gsuiteconfig
+```
 4. Add the following in your .env file:
 ```
   ENABLE_GSUITESMTP="true" #Preffered to be in quotes
@@ -53,7 +59,7 @@ Points to keep in mind:
   MAIL_FROM_ADDRESS=youremail@tld.com
   MAIL_FROM_NAME="${APP_NAME}"
 ```
-2. This is not a production level package and is there just to get started. It will work and give you the desired results but this is the only documentation at the moment.
+2. This is not a production level package and is there just to get you started. It will work and give you the desired results but this is the only documentation at the moment and offers no gurantee whatsoever.
 
 Contributors are welcomed to work further on this project. Remove flaws, add dcoumentation or more features, more smtp providers etc.
 
