@@ -53,14 +53,6 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 				
 				$from_email = $mail_config['from']['address'];
 				$from_name = $mail_config['from']['name'];
-				
-				$mailer->alwaysFrom($from_email, $from_name);
-				$mailer->alwaysReplyTo($from_email, $from_name);
-
-			
-				if ($app->bound('queue')) {
-					$mailer->setQueue($app['queue']);
-				}
 
 			}else{
 				
@@ -68,6 +60,17 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 					$app['view'], $app['swift.mailer'] , $app['events']
 				);
 				
+			}
+			
+			$from_email = $mail_config['from']['address'];
+			$from_name = $mail_config['from']['name'];
+			
+			$mailer->alwaysFrom($from_email, $from_name);
+			$mailer->alwaysReplyTo($from_email, $from_name);
+
+		
+			if ($app->bound('queue')) {
+				$mailer->setQueue($app['queue']);
 			}
 			
 			return $mailer;
