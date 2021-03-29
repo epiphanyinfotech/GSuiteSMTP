@@ -23,7 +23,7 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 		$this->app->singleton('mailer', function ($app) use ($mail_config, $gss_config) {
 			
 			//check if GSuiteSMTP is enabled in the env file by having it's value set to "true"
-			$enable_gsuite_smtp = $_ENV['ENABLE_GSUITESMTP']; 
+			$enable_gsuite_smtp = config('GSuiteSMTP.enable'); 
 			
 			$oauthUserEmail = config('GSuiteSMTP.user_email');
 			$oauthClientSecret = config('GSuiteSMTP.client_secret');
@@ -43,29 +43,42 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
 			
 				$gsuite_token = $google_oauth->getOauth();
 				
+								
 				// Once we have create the mailer instance, we will set a container instance
 				// on the mailer. This allows us to resolve mailer classes via containers
 				// for maximum testability on said classes instead of passing Closures.
 				$mailer = new Mailer(
 					$app['view'], new Swift_Mailer($this->createSmtpDriver($mail_config, $gss_config, $gsuite_token)), $app['events']
 				);
+				
+				$from_email = $mail_config['from']['address'];
+				$from_name = $mail_config['from']['name'];
+				
+				$mailer->alwaysFrom($from_email, $from_name);
+				$mailer->alwaysReplyTo($from_email, $from_name);
+
+			
+				if ($app->bound('queue')) {
+					$mailer->setQueue($app['queue']);
+				}
 
 			}else{
 				
 				$mailer = new Mailer(
 					$app['view'], $app['swift.mailer'] , $app['events']
 				);
+
+				$from_email = $mail_config['from']['address'];
+				$from_name = $mail_config['from']['name'];
 				
-			}
+				$mailer->alwaysFrom($from_email, $from_name);
+				$mailer->alwaysReplyTo($from_email, $from_name);
+
 			
-			$from_email = $mail_config['from']['address'];
-			$from_name = $mail_config['from']['name'];
-			
-			$mailer->alwaysFrom($from_email, $from_name);
-			$mailer->alwaysReplyTo($from_email, $from_name);
-		
-			if ($app->bound('queue')) {
-				$mailer->setQueue($app['queue']);
+				if ($app->bound('queue')) {
+					$mailer->setQueue($app['queue']);
+				}
+				
 			}
 			
 			return $mailer;
@@ -108,6 +121,7 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
             $transport->setStreamOptions($config['stream']);
         }
 
+
         return $transport;
     }
 	
@@ -117,6 +131,7 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
             __DIR__.'/config/GSuiteSMTP.php' => config_path('GSuiteSMTP.php')
         ], 'gsuiteconfig');
     }
+ 
     
 	
 	/**
@@ -128,5 +143,6 @@ class GSuiteSMTPServiceProvider extends ServiceProvider implements DeferrablePro
             'mailer'
         ];
     }
+	
 	
 }

@@ -28,11 +28,11 @@ php artisan vendor:publish --tag=gsuiteconfig
 ```
 4. Add the following in your .env file:
 ```
-  ENABLE_GSUITESMTP="true" #Preffered to be in quotes
+  ENABLE_GSUITESMTP=true
   SMTP_USER_EMAIL=youremail@tld.com
-  SMTP_REFRESH_TOKEN="your referesh token" #Preffered to be in quotes
-  SMTP_CLIENT_SECRET="your client secret" #Preffered to be in quotes
-  SMTP_CLIENT_ID="your client id" #Preffered to be in quotes
+  SMTP_REFRESH_TOKEN="your referesh token" #preferred to be in quotes
+  SMTP_CLIENT_SECRET="your client secret" #preferred to be in quotes
+  SMTP_CLIENT_ID="your client id" #preferred to be in quotes
 ```  
 5. Delete the cached files present in `bootstrap\cache`. No need to delete the .gitignore file.
 
@@ -61,7 +61,7 @@ Points to keep in mind:
 ```
 2. This is not a production level package and is there just to get you started. It will work and give you the desired results but this is the only documentation at the moment and offers no gurantee whatsoever.
 
-Contributors are welcomed to work further on this project. Remove flaws, add dcoumentation or more features, more smtp providers etc.
+Contributors are welcomed to work further on this project. Remove flaws, add documentation or more features, more smtp providers etc.
 
 For any inquires regarding a new Laravel Project or any web or mobile development related work, please visit:
 

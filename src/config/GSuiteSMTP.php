@@ -5,4 +5,5 @@ return [
     'refresh_token' => env('SMTP_REFRESH_TOKEN'),
     'client_secret' => env('SMTP_CLIENT_SECRET'),
     'client_id' => env('SMTP_CLIENT_ID'),
+    'enable' => env('ENABLE_GSUITESMTP'),
 ];
